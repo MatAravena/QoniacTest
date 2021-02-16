@@ -10,21 +10,21 @@
         Name="wnd"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid Margin="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="319*" />
+                <ColumnDefinition Width="421*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="auto" MinHeight="34" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
+            <!--ValueDataType="{x:Type s:String}"-->
+            <xctk:MaskedTextBox Name="txtMoney" ValueDataType="{x:Type AccessText }" Mask="000 000 000,00" CaretIndex="0"  FontSize="14" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="20"/>
+            <Button Grid.Column="1" Content="Send" HorizontalAlignment="Left" Width="63" RenderTransformOrigin="-1.841,0.386" Click="Button_Click" Margin="0,0,0,1"/>
+            <Label Grid.Row="1" Name="lblResult" Content="Label" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="30"/>
 
-        <!--ValueDataType="{x:Type s:String}"-->
-        <xctk:MaskedTextBox Name="txtMoney"  Mask="000 000 000,00" CaretIndex="0"  FontSize="14" HorizontalAlignment="Left" Height="39" Margin="33,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"></xctk:MaskedTextBox>
-        <Button Content="Send" HorizontalAlignment="Left" Height="39" Margin="269,14,0,0" VerticalAlignment="Top" Width="63" RenderTransformOrigin="-1.841,0.386" Click="Button_Click"/>
-        <Label Name="lblResult" Content="Label" HorizontalAlignment="Left" Margin="33,74,0,0" VerticalAlignment="Top"/>
-        <!--<TextBox Text="{Binding Amount,Mode=TwoWay,StringFormat={}{0:C}}" HorizontalAlignment="Left" Height="39" Margin="324,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-        <TextBox Text="{Binding YourSourceProperty,StringFormat=f2}" HorizontalAlignment="Left" Height="39" Margin="324,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-        <TextBox TextAlignment="Right" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged,
-           StringFormat='#.00'}" HorizontalAlignment="Left" Height="39" Margin="324,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-
-        <TextBox  Text="{Binding Path=wnd, Mode=TwoWay, StringFormat=Window height: {0:C}}" HorizontalAlignment="Left" Height="39" Margin="52,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="191"/>
-
-        <TextBox  HorizontalAlignment="Left" Height="39" Margin="562,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-        <TextBox  HorizontalAlignment="Left" Height="39" Margin="562,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>-->
-
+        </Grid>
     </Grid>
 </Window>
