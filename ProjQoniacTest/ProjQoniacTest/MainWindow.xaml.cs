@@ -34,29 +34,35 @@ namespace ProjQoniacTest
                 if (s == null || s.Length == 0 || s.Equals("___ ___ ___,__"))
                     return "invalid number";
 
-                string x = s.Replace("_", string.Empty).Replace(",", ".");
-
-                decimal wholeNumber = decimal.Parse(s.Replace("_", string.Empty));
-                if (wholeNumber == 0)
-                    return "0 dolar";
-
                 //0 zero dollars
                 //1 one dollar
                 //25,1 twenty - five dollars and ten cents
                 //0,01 zero dollars and one cent
                 //45 100 forty - five thousand one hundred dollars
                 //999 999 999,99 nine hundred ninety - nine million nine hundred
-                //ninety - nine thousand nine hundred      ninety-nine dollars      and ninety - nine cents
+                //ninety - nine thousand nine hundred ninety-nine dollars and ninety - nine cents
 
-                int number = 0, cents = 0;
-                string[] lstValues = x.Trim().Split(".");
-                number = int.Parse(lstValues[0]);
-                cents = int.Parse(lstValues[1]);
+                int number = 0, centsValue = 0;
+                string cents = string.Empty;
+                string[] lstValues = s.Trim().Replace(" ", string.Empty).Split(",");
+
+                if (lstValues.Length > 0 && !int.TryParse(lstValues[0].Replace("_", string.Empty), out number))
+                    number = 0;
+
+                if (lstValues.Length > 1 && lstValues[1].Length >= 1)
+                {
+                    cents = lstValues[1].Replace("_", "0");
+                    if (!int.TryParse(cents, out centsValue))
+                        centsValue = 0;
+                }
 
                 string dollars = string.Empty, centsWords = string.Empty, with = string.Empty;
-                assignWords(number, cents, ref dollars, ref centsWords, ref with);
+                AssignWords(number, centsValue, ref dollars, ref centsWords, ref with);
 
-                return string.Format("{0} {1} {2} {3} {4}", this.NumberToWord(number.ToString()), dollars, with, this.NumberToWord(cents.ToString()), centsWords);
+                if (centsValue > 0)
+                    return string.Format("{0} {1} {2} {3} {4}", this.NumberToWord(number), dollars, with, ConvertDecimals(cents), centsWords);
+                else
+                    return string.Format("{0} {1}", this.NumberToWord(number), dollars);
             }
             catch (Exception e)
             {
@@ -64,99 +70,107 @@ namespace ProjQoniacTest
             }
         }
 
-        public string NumberToWord(string s)
+        private string ConvertDecimals(string number)
         {
-            string prueba = Decimals(s);
-            int numb = int.Parse(s);
+            if (number.Length > 1 && number[0].ToString().Equals("0"))
+                return this.Units(number);
 
-            //switch (true)
-            //{
-            //    case true.Equals(numb >= 100 && numb < 200):
-            //        prueba = "";
-            //        break;
-
-            //    default:
-            //        break;
-            //}
-            //999 999 999
-
-            switch (int.Parse(s))
-            {
-                case 0:
-                    return "cero";
-
-                default:
-                    break;
-            }
-
-            return prueba;
+            return this.Tens(number, true);
         }
 
-        private string Decimals(string decimals)
+        public string NumberToWord(int numb)
+        {
+            string test = string.Empty;
+
+            if (numb == 0)
+                return "zero";
+
+            if (numb < 0)
+                return "negavitve " + NumberToWord(Math.Abs(numb));
+
+            if ((numb / 1000000) > 0)
+            {
+                test += NumberToWord(numb / 1000000) + " million ";
+                numb %= 1000000;
+            }
+
+            if ((numb / 1000) > 0)
+            {
+                test += NumberToWord(numb / 1000) + " thousand ";
+                numb %= 1000;
+            }
+
+            if ((numb / 100) > 0)
+            {
+                test += NumberToWord(numb / 100) + " hundred ";
+                numb %= 100;
+            }
+
+            if (numb <= 9)
+                test += Units(numb.ToString());
+            else
+                test += Tens(numb.ToString());
+
+            return test;
+        }
+
+        private string Tens(string decimals, bool isCent = false)
         {
             string name = string.Empty;
-            int numb = int.Parse(decimals);
-            switch (numb)
+            switch (int.Parse(decimals))
             {
                 case 10:
-                    name = "Ten - ";
-                    break;
+                    return "ten";
                 case 11:
-                    name = "Eleven - ";
-                    break;
+                    return "eleven";
                 case 12:
-                    name = "Twelve - ";
-                    break;
+                    return "twelve";
                 case 13:
-                    name = "Thirteen - ";
-                    break;
+                    return "thirteen";
                 case 14:
-                    name = "Fourteen - ";
-                    break;
+                    return "fourteen";
                 case 15:
-                    name = "Fifteen - ";
-                    break;
+                    return "fifteen";
                 case 16:
-                    name = "Sixteen - ";
-                    break;
+                    return "sixteen";
                 case 17:
-                    name = "Seventeen - ";
-                    break;
+                    return "seventeen";
                 case 18:
-                    name = "Eighteen - ";
-                    break;
+                    return "eighteen";
                 case 19:
-                    name = "Nineteen - ";
-                    break;
+                    return "nineteen";
                 case 20:
-                    name = "Twenty - ";
+                    name = "twenty";
                     break;
                 case 30:
-                    name = "Thirty - ";
+                    name = "thirty";
                     break;
                 case 40:
-                    name = "Fourty - ";
+                    name = "fourty";
                     break;
                 case 50:
-                    name = "Fifty - ";
+                    name = "fifty";
                     break;
                 case 60:
-                    name = "Sixty - ";
+                    name = "sixty";
                     break;
                 case 70:
-                    name = "Seventy - ";
+                    name = "seventy";
                     break;
                 case 80:
-                    name = "Eighty - ";
+                    name = "eighty";
                     break;
                 case 90:
-                    name = "Ninety - ";
+                    name = "ninety";
                     break;
                 default:
-                    name = this.Decimals(decimals.Substring(0, 1) + "0") + " " + this.Units(decimals.Substring(1));
-                    break;
+                    return this.Tens(decimals.Substring(0, 1) + "0") + " " + this.Units(decimals.Substring(1));
             }
-            return name;
+
+            if (isCent)
+                return name;
+
+            return name + " -";
         }
 
         private string Units(string units)
@@ -165,50 +179,50 @@ namespace ProjQoniacTest
             string name = "";
             switch (_Number)
             {
-                case 0:
-                    name = "Zero";
-                    break;
+                //case 0:
+                //    name = "zero";
+                //    break;
                 case 1:
-                    name = "One";
+                    name = "one";
                     break;
                 case 2:
-                    name = "Two";
+                    name = "two";
                     break;
                 case 3:
-                    name = "Three";
+                    name = "three";
                     break;
                 case 4:
-                    name = "Four";
+                    name = "four";
                     break;
                 case 5:
-                    name = "Five";
+                    name = "five";
                     break;
                 case 6:
-                    name = "Six";
+                    name = "six";
                     break;
                 case 7:
-                    name = "Seven";
+                    name = "seven";
                     break;
                 case 8:
-                    name = "Eight";
+                    name = "eight";
                     break;
                 case 9:
-                    name = "Nine";
+                    name = "nine";
                     break;
             }
             return name;
         }
 
-        private void assignWords(int number, int cents, ref string dollars, ref string centsWords, ref string with)
+        private void AssignWords(int number, int cents, ref string dollars, ref string centsWords, ref string with)
         {
-            if (number > 0 && number <= 9)
-                dollars = "dolar";
+            if (number == 1)
+                dollars = "dollar";
             else
                 dollars = "dollars";
 
-            if (cents >= 0)
+            if (cents > 0)
             {
-                with = "with";
+                with = "and";
                 centsWords = string.Format("cent{0}", cents >= 10 ? "s" : string.Empty);
             }
         }
@@ -217,6 +231,5 @@ namespace ProjQoniacTest
         {
             lblResult.Content = this.getInitialValue(txtMoney.MaskedTextProvider.ToString());
         }
-
     }
 }
