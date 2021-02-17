@@ -10,21 +10,16 @@
         Name="wnd"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid Margin="30">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="319*" />
-                <ColumnDefinition Width="421*" />
-            </Grid.ColumnDefinitions>
+        <Grid Margin="30,30,30,30">
             <Grid.RowDefinitions >
                 <RowDefinition Height="auto" MinHeight="34" />
-                <RowDefinition/>
+                <RowDefinition />
             </Grid.RowDefinitions>
 
             <!--ValueDataType="{x:Type s:String}"-->
-            <xctk:MaskedTextBox Name="txtMoney" ValueDataType="{x:Type AccessText }" Mask="000 000 000,00" CaretIndex="0"  FontSize="14" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="20"/>
-            <Button Grid.Column="1" Content="Send" HorizontalAlignment="Left" Width="63" RenderTransformOrigin="-1.841,0.386" Click="Button_Click" Margin="0,0,0,1"/>
-            <Label Grid.Row="1" Name="lblResult" Content="Label" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="30"/>
-
+            <xctk:MaskedTextBox Name="txtMoney" ValueDataType="{x:Type AccessText}" Mask="000 000 000,00" CaretIndex="0" Margin="15" FontSize="14" HorizontalAlignment="left" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="25"/>
+            <Button Content="Send" HorizontalAlignment="Center" Width="70" RenderTransformOrigin="-1.841,0.386" Click="Button_Click" Margin="0,10"/>
+            <Label Grid.Row="1" Name="lblResult" Content="Label" HorizontalAlignment="Left" Margin="20,5" VerticalAlignment="Top" Height="30"/>
         </Grid>
     </Grid>
 </Window>

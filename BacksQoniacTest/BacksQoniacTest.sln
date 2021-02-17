@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BckCore", "BckCore\BckCore.csproj", "{F04FFE20-BDE9-4B09-92FA-9D6F0D5F9A04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{EDE6B054-5D56-40D9-BB9A-1693429136BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackWebApiNet", "BackWebApiNet\BackWebApiNet.csproj", "{C4136D77-F163-4EEB-8036-8C847BD00683}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F04FFE20-BDE9-4B09-92FA-9D6F0D5F9A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F04FFE20-BDE9-4B09-92FA-9D6F0D5F9A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F04FFE20-BDE9-4B09-92FA-9D6F0D5F9A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F04FFE20-BDE9-4B09-92FA-9D6F0D5F9A04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDE6B054-5D56-40D9-BB9A-1693429136BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE6B054-5D56-40D9-BB9A-1693429136BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE6B054-5D56-40D9-BB9A-1693429136BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE6B054-5D56-40D9-BB9A-1693429136BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4136D77-F163-4EEB-8036-8C847BD00683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4136D77-F163-4EEB-8036-8C847BD00683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4136D77-F163-4EEB-8036-8C847BD00683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4136D77-F163-4EEB-8036-8C847BD00683}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0B4998A-E745-4825-BABE-1EAA00CDAD1A}
+	EndGlobalSection
+EndGlobal
