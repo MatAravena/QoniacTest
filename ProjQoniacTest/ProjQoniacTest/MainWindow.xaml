@@ -3,12 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:ProjQoniacTest"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Name="wnd"
-        Title="MainWindow" Height="450" Width="800">
+        Background="Black" Foreground="Gray"
+        Title="QoniacTest" Height="450" Width="800">
     <Grid>
         <Grid Margin="30,30,30,30">
             <Grid.RowDefinitions >
@@ -17,9 +18,9 @@
             </Grid.RowDefinitions>
 
             <!--ValueDataType="{x:Type s:String}"-->
-            <xctk:MaskedTextBox Name="txtMoney" ValueDataType="{x:Type AccessText}" Mask="000 000 000,00" CaretIndex="0" Margin="15" FontSize="14" HorizontalAlignment="left" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="25"/>
-            <Button Content="Send" HorizontalAlignment="Center" Width="70" RenderTransformOrigin="-1.841,0.386" Click="Button_Click" Margin="0,10"/>
-            <Label Grid.Row="1" Name="lblResult" Content="Label" HorizontalAlignment="Left" Margin="20,5" VerticalAlignment="Top" Height="30"/>
+            <xctk:MaskedTextBox x:Name="txtMoney" Text="{Binding Txt, Mode = TwoWay}" ValueDataType="{x:Type AccessText}" Mask="000 000 000,00" CaretIndex="0" Margin="15" FontSize="14" HorizontalAlignment="left" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="25"/>
+            <Button Content="Send" HorizontalAlignment="Center" FontWeight="Bold"  Width="70" RenderTransformOrigin="-1.841,0.386" Click="Button_Click" Margin="0,10"/>
+            <Label Grid.Row="1" x:Name="lblResult" Foreground="AliceBlue" Content="Label" HorizontalAlignment="Left" Margin="20,5" VerticalAlignment="Top" Height="30"/>
         </Grid>
     </Grid>
 </Window>

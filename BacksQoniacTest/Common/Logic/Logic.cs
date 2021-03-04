@@ -1,4 +1,4 @@
-﻿using Common.Data;
+﻿using Common.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,21 +7,11 @@ namespace Common.Logic
 {
     public class Logic
     {
-        public void GetValue(ref DataMessage message)
+        public DataMessage GetValue(DataMessage inMessage)
         {
+            DataMessage message = new DataMessage(inMessage);
             try
             {
-                if (message.numbValue == null || message.numbValue.Length == 0 || message.numbValue.Equals("___ ___ ___,__"))
-                    message.numbInWords = "invalid number";
-
-                //0 zero dollars
-                //1 one dollar
-                //25,1 twenty - five dollars and ten cents
-                //0,01 zero dollars and one cent
-                //45 100 forty - five thousand one hundred dollars
-                //999 999 999,99 nine hundred ninety - nine million nine hundred
-                //ninety - nine thousand nine hundred ninety-nine dollars and ninety - nine cents
-
                 int number = 0, centsValue = 0;
                 string cents = string.Empty;
                 string[] lstValues = message.numbValue.Trim().Replace(" ", string.Empty).Split(Convert.ToChar(","));
@@ -48,6 +38,8 @@ namespace Common.Logic
             {
                 message.numbInWords = e.Message;
             }
+
+            return message;
         }
 
         private string ConvertDecimals(string number)
@@ -206,7 +198,5 @@ namespace Common.Logic
                 centsWords = string.Format("cent{0}", cents >= 10 ? "s" : string.Empty);
             }
         }
-
-
     }
 }

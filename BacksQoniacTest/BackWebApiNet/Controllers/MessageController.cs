@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Common.Logic;
+using Common.Model;
+using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -22,39 +21,28 @@ namespace BackWebApiNet.Controllers
         {
             var result = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(JsonConvert.SerializeObject("RESPT OK!" ))
+                Content = new StringContent(JsonConvert.SerializeObject("RESPT OK!"))
             };
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             return result;
         }
 
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Response(object obj)
         {
-            return new string[] { "value1", "value2" };
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(obj))
+            };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            return result;
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [Route("api/ChangevalueServ")]
+        [HttpPost]
+        public HttpResponseMessage ChangeValueServ(DataMessage value)
         {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody] string value)
-        {
-            string valueasd = string.Empty;
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-
+            Logic lgc = new Logic();
+            return Response(lgc.GetValue(value));
         }
     }
 }

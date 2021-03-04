@@ -6,6 +6,9 @@ namespace ProjQoniacTest.Model
 {
     public class DataMessage
     {
+        public DataMessage()
+        {
+        }
         public DataMessage(string numbValue)
         {
             this.numbValue = numbValue;

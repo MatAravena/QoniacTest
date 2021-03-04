@@ -13,27 +13,68 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ProjQoniacTest.Commands;
+using ProjQoniacTest.Services;
+using System.ComponentModel;
 
 namespace ProjQoniacTest
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
             lblResult.Content = string.Empty;
+            this.Lbl = string.Empty;
+            this.Txt = string.Empty;
+        }
+         
+
+        private string _lbl;
+        private string _txt;
+        public string Lbl
+        {
+            get { return _lbl; }
+            set
+            {
+                if (value != _lbl)
+                {
+                    _lbl = value; 
+                }
+            }
+        }
+        public string Txt
+        {
+            get { return _txt; }
+            set
+            {
+                if (value != _txt)
+                {
+                    _txt = value;
+                }
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public object PropertyChanged { get; private set; }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            ServicioMessage serv = new ServicioMessage();
-            lblResult.Content = serv.SendMessageAsync(txtMoney.MaskedTextProvider.ToString());
+            try
+            {
+                string numb = txtMoney.MaskedTextProvider.ToString();
+                if (numb == null || numb.Length == 0 || numb.Equals("___ ___ ___,__"))
+                {
+                    Txt =  "invalid number";
+                    lblResult.Content = "invalid number";
+                    return;
+                }
 
-
+                ServicioMessage serv = new ServicioMessage();
+                lblResult.Content = await serv.SendMessageAsync(numb);
+            }
+            catch (Exception ex)
+            {
+                lblResult.Content = ex.Message;
+            }
         }
     }
 }
